@@ -1,12 +1,24 @@
 
 import React, { useState } from 'react';
 import { Shield, Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  // For home page, use hash links
+  // For other pages, navigate to home with hash
+  const getNavLink = (section: string) => {
+    if (isHomePage) {
+      return `#${section}`;
+    }
+    return `/#${section}`;
   };
 
   return (
@@ -15,28 +27,30 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo and Brand name */}
           <div className="flex items-center space-x-2">
-            <Shield className="h-8 w-8 text-kitopanto-orange" />
-            <span className="text-xl font-bold text-kitopanto-blue">Kitopanto CCTV</span>
+            <Link to="/" className="flex items-center space-x-2">
+              <Shield className="h-8 w-8 text-kitopanto-orange" />
+              <span className="text-xl font-bold text-kitopanto-blue">Kitopanto CCTV</span>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#beranda" className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
+            <a href={getNavLink('beranda')} className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
               Beranda
             </a>
-            <a href="#produk" className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
+            <a href={getNavLink('produk')} className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
               Produk
             </a>
-            <a href="#fitur" className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
+            <a href={getNavLink('fitur')} className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
               Fitur
             </a>
-            <a href="#keunggulan" className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
+            <a href={getNavLink('keunggulan')} className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
               Keunggulan
             </a>
-            <a href="#testimoni" className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
+            <a href={getNavLink('testimoni')} className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
               Testimoni
             </a>
-            <a href="#kontak" className="cta-button">
+            <a href={getNavLink('kontak')} className="cta-button">
               Hubungi Kami
             </a>
           </div>
@@ -54,41 +68,41 @@ const Navbar: React.FC = () => {
           <div className="md:hidden mt-4 pb-4 animate-fade-in">
             <div className="flex flex-col space-y-4">
               <a 
-                href="#beranda" 
+                href={getNavLink('beranda')} 
                 className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors"
                 onClick={toggleMenu}
               >
                 Beranda
               </a>
               <a 
-                href="#produk" 
+                href={getNavLink('produk')} 
                 className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors"
                 onClick={toggleMenu}
               >
                 Produk
               </a>
               <a 
-                href="#fitur" 
+                href={getNavLink('fitur')} 
                 className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors"
                 onClick={toggleMenu}
               >
                 Fitur
               </a>
               <a 
-                href="#keunggulan" 
+                href={getNavLink('keunggulan')} 
                 className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors"
                 onClick={toggleMenu}
               >
                 Keunggulan
               </a>
               <a 
-                href="#testimoni" 
+                href={getNavLink('testimoni')} 
                 className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors"
                 onClick={toggleMenu}
               >
                 Testimoni
               </a>
-              <a href="#kontak" className="cta-button inline-block text-center" onClick={toggleMenu}>
+              <a href={getNavLink('kontak')} className="cta-button inline-block text-center" onClick={toggleMenu}>
                 Hubungi Kami
               </a>
             </div>

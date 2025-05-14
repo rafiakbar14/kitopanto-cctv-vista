@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -31,11 +32,11 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-6">Produk</h3>
             <ul className="space-y-3">
               {[
-                'Outdoor Cameras',
-                'Indoor Cameras',
-                'NVR Systems',
-                'Hidden Cameras',
-                'Accessories',
+                'Kamera Outdoor',
+                'Kamera Indoor',
+                'Sistem NVR',
+                'Kamera Tersembunyi',
+                'Aksesoris',
                 'Software'
               ].map(item => (
                 <li key={item}>
@@ -100,9 +101,9 @@ const Footer: React.FC = () => {
             &copy; 2025 Kitopanto CCTV. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Sitemap</a>
+            <Link to="/privacy" className="text-gray-300 hover:text-white transition-colors">Kebijakan Privasi</Link>
+            <a href="#" className="text-gray-300 hover:text-white transition-colors">Syarat & Ketentuan</a>
+            <a href="#" className="text-gray-300 hover:text-white transition-colors">Peta Situs</a>
           </div>
         </div>
       </div>
