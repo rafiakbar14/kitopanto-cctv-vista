@@ -6,32 +6,32 @@ const Features: React.FC = () => {
   const features = [
     {
       icon: <Camera className="h-10 w-10 text-kitopanto-orange" />,
-      title: "Kualitas HD",
-      description: "Resolusi tinggi dengan gambar yang jernih untuk detail maksimum pada setiap rekaman."
+      title: "Kualitas Gambar Jernih",
+      description: "Lihat dengan jelas setiap detail dengan kamera resolusi tinggi, bahkan dalam kondisi gelap."
     },
     {
       icon: <ShieldCheck className="h-10 w-10 text-kitopanto-orange" />,
-      title: "Deteksi Gerakan",
-      description: "Sistem cerdas yang mendeteksi dan memberikan notifikasi instan saat ada pergerakan."
+      title: "Notifikasi ke HP",
+      description: "Langsung tahu jika ada gerakan mencurigakan melalui notifikasi otomatis ke smartphone Anda."
     },
     {
       icon: <Tags className="h-10 w-10 text-kitopanto-orange" />,
-      title: "Akses Jarak Jauh",
-      description: "Pantau properti Anda kapanpun dan dimanapun melalui aplikasi mobile."
+      title: "Pantau dari Mana Saja",
+      description: "Akses kamera kapan saja dan di mana saja melalui aplikasi di HP, tablet, atau komputer."
     },
     {
       icon: <ShieldAlert className="h-10 w-10 text-kitopanto-orange" />,
-      title: "Penyimpanan Cloud",
-      description: "Rekaman tersimpan dengan aman di cloud dengan backup otomatis."
+      title: "Pemasangan Mudah",
+      description: "Tak perlu teknisi mahal, Anda bisa memasang sendiri dengan panduan lengkap dari kami."
     }
   ];
 
   return (
     <section id="fitur" className="section-padding bg-gray-50">
       <div className="kitopanto-container">
-        <h2 className="section-title text-center">Fitur Unggulan</h2>
+        <h2 className="section-title text-center">Keunggulan CCTV Kami</h2>
         <p className="section-subtitle text-center">
-          Nikmati berbagai fitur canggih yang memberikan keamanan dan kenyamanan maksimal
+          Rasakan manfaat sistem pengawasan modern yang praktis dan terjangkau untuk ketenangan Anda
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
@@ -50,17 +50,17 @@ const Features: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="p-8 md:p-12 flex flex-col justify-center">
               <h3 className="text-2xl md:text-3xl font-bold text-kitopanto-blue mb-4">
-                Teknologi Pintar untuk Keamanan Modern
+                Pengawasan Cerdas untuk Rumah & Toko Anda
               </h3>
               <p className="text-kitopanto-darkGray mb-6">
-                Sistem CCTV kami terintegrasi dengan teknologi AI untuk mendeteksi kejadian mencurigakan, memberikan Anda ketenangan pikiran yang tidak ternilai.
+                Dengan teknologi terbaru, CCTV kami bukan hanya merekam tapi bisa memberi tahu jika ada sesuatu yang mencurigakan. Jadi Anda bisa tenang meski sedang tidak di tempat.
               </p>
               <ul className="space-y-3">
                 {[
-                  "Deteksi wajah otomatis",
-                  "Peringatan real-time",
-                  "Pencatatan aktivitas 24/7",
-                  "Analisis lalu lintas area"
+                  "Lihat wajah dengan jelas bahkan dalam kondisi gelap",
+                  "Pemberitahuan langsung ke HP jika ada gerakan",
+                  "Rekam terus selama 24 jam non-stop",
+                  "Putar ulang rekaman dengan mudah dari aplikasi"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center">
                     <span className="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-3">
@@ -74,7 +74,7 @@ const Features: React.FC = () => {
               </ul>
               <div className="mt-8">
                 <a href="#kontak" className="cta-button inline-block">
-                  Pelajari Lebih Lanjut
+                  Dapatkan Info Lengkap
                 </a>
               </div>
             </div>

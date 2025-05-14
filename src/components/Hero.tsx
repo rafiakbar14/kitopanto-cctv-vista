@@ -10,23 +10,23 @@ const Hero: React.FC = () => {
           <div className="space-y-6 animate-fade-in">
             <div className="inline-flex items-center px-4 py-2 bg-kitopanto-orange/20 rounded-full text-kitopanto-orange">
               <ShieldCheck className="h-5 w-5 mr-2" />
-              <span className="text-sm font-medium">Solusi Keamanan Terpercaya</span>
+              <span className="text-sm font-medium">Distributor Resmi V380</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Lindungi Properti Anda Dengan Sistem CCTV Modern
+              CCTV Murah & Mudah Dipasang Sendiri
             </h1>
             
             <p className="text-lg md:text-xl text-gray-200 max-w-xl">
-              Sistem pengawasan profesional dengan teknologi terkini untuk rumah dan bisnis Anda. Pantau properti Anda kapanpun dan dimanapun.
+              Pantau rumah dan toko dari mana saja menggunakan HP, tanpa biaya bulanan. Pasang sendiri dalam 10 menit tanpa bantuan teknisi!
             </p>
             
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
               <a href="#kontak" className="cta-button text-center">
-                Dapatkan Penawaran
+                Pesan Sekarang
               </a>
               <a href="#produk" className="secondary-button text-center">
-                Lihat Produk
+                Lihat Katalog
               </a>
             </div>
             
@@ -34,24 +34,24 @@ const Hero: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <div className="flex -space-x-2">
                   <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-kitopanto-blue">
-                    <span className="font-medium">AL</span>
+                    <span className="font-medium">BS</span>
                   </div>
                   <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-kitopanto-blue">
-                    <span className="font-medium">RD</span>
+                    <span className="font-medium">JK</span>
                   </div>
                   <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-kitopanto-blue">
-                    <span className="font-medium">SN</span>
+                    <span className="font-medium">MR</span>
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Dipercaya oleh 1.000+ pelanggan</p>
+                  <p className="text-sm font-medium">Dipercaya oleh 3.000+ pelanggan</p>
                   <div className="flex items-center">
                     {[...Array(5)].map((_, i) => (
                       <svg key={i} className="w-4 h-4 text-kitopanto-orange" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                       </svg>
                     ))}
-                    <span className="ml-1 text-sm">(4.9/5)</span>
+                    <span className="ml-1 text-sm">(4.8/5)</span>
                   </div>
                 </div>
               </div>
@@ -76,8 +76,8 @@ const Hero: React.FC = () => {
               <div className="mt-3 bg-gray-800 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-white font-bold">Monitoring Aktif</h3>
-                    <p className="text-gray-400 text-sm">4 kamera terdeteksi</p>
+                    <h3 className="text-white font-bold">Aplikasi V380 Pro</h3>
+                    <p className="text-gray-400 text-sm">Pantau langsung dari HP</p>
                   </div>
                   <div className="bg-kitopanto-orange text-white text-xs font-bold uppercase p-1 px-2 rounded">Live</div>
                 </div>
