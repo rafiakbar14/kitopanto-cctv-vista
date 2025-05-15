@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Shield, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import UserMenu from "./UserMenu";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,13 +51,17 @@ const Navbar: React.FC = () => {
             <a href={getNavLink('testimoni')} className="text-kitopanto-darkGray hover:text-kitopanto-blue font-medium transition-colors">
               Testimoni
             </a>
-            <a href={getNavLink('kontak')} className="cta-button">
-              Hubungi Kami
-            </a>
+            <div className="flex items-center space-x-4">
+              <a href={getNavLink('kontak')} className="cta-button">
+                Hubungi Kami
+              </a>
+              <UserMenu />
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-2">
+            <UserMenu />
             <button onClick={toggleMenu} className="text-kitopanto-blue focus:outline-none">
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
