@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from '@/hooks/useAuth';
-import { Shield, LogIn, UserPlus, Google } from "lucide-react";
+import { Shield, LogIn, UserPlus, Mail } from "lucide-react";
 
 const Login = () => {
   const [isLogin, setIsLogin] = React.useState(true);
@@ -138,7 +138,7 @@ const Login = () => {
               onClick={handleGoogleLogin}
               disabled={loading}
             >
-              <Google className="mr-2 h-4 w-4" />
+              <Mail className="mr-2 h-4 w-4" />
               Lanjutkan dengan Google
             </Button>
           </CardContent>
