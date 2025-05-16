@@ -1,12 +1,12 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { useAuth } from '@/hooks/useAuth';
 import { Shield, LogIn, UserPlus, Mail } from "lucide-react";
 
@@ -15,37 +15,77 @@ const Login = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [captchaToken, setCaptchaToken] = React.useState<string | null>(null);
+  const recaptchaRef = useRef<any>(null);
   
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const { login, register, loginWithGoogle } = useAuth();
+  const { login, register, loginWithGoogle, user } = useAuth();
+
+  // Redirect if user is already logged in
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+  // Initialize reCAPTCHA
+  useEffect(() => {
+    // Load the reCAPTCHA script
+    const loadRecaptcha = () => {
+      const script = document.createElement('script');
+      script.src = 'https://www.google.com/recaptcha/api.js';
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+      return () => {
+        document.body.removeChild(script);
+      };
+    };
+    
+    const cleanup = loadRecaptcha();
+    return cleanup;
+  }, []);
+
+  const executeCaptcha = async () => {
+    if (window.grecaptcha && recaptchaRef.current) {
+      try {
+        const token = await window.grecaptcha.execute(recaptchaRef.current, { action: 'login' });
+        setCaptchaToken(token);
+        return token;
+      } catch (error) {
+        console.error('reCAPTCHA error:', error);
+        return null;
+      }
+    }
+    return null;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      // Verify captcha first
+      await executeCaptcha();
+      
       if (isLogin) {
         // Handle login
         await login(email, password);
-        toast({
-          title: "Login berhasil",
+        toast("Login berhasil", {
           description: "Selamat datang kembali!",
         });
         navigate('/');
       } else {
         // Handle registration
         await register(email, password);
-        toast({
-          title: "Pendaftaran berhasil",
+        toast("Pendaftaran berhasil", {
           description: "Akun Anda telah dibuat, silakan masuk.",
         });
         setIsLogin(true);
       }
     } catch (error) {
       console.error(error);
-      toast({
-        title: "Terjadi kesalahan",
+      toast("Terjadi kesalahan", {
         description: isLogin 
           ? "Email atau kata sandi tidak valid." 
           : "Gagal membuat akun. Silakan coba lagi.",
@@ -60,19 +100,13 @@ const Login = () => {
     setLoading(true);
     try {
       await loginWithGoogle();
-      toast({
-        title: "Login berhasil",
-        description: "Selamat datang!",
-      });
-      navigate('/');
+      // The redirect will happen automatically, no need to navigate
     } catch (error) {
       console.error(error);
-      toast({
-        title: "Terjadi kesalahan",
+      toast("Terjadi kesalahan", {
         description: "Gagal login dengan Google. Silakan coba lagi.",
         variant: "destructive",
       });
-    } finally {
       setLoading(false);
     }
   };
@@ -121,6 +155,14 @@ const Login = () => {
                   required
                 />
               </div>
+
+              {/* Hidden reCAPTCHA */}
+              <div className="g-recaptcha" 
+                data-sitekey="YOUR_RECAPTCHA_SITE_KEY"
+                data-size="invisible"
+                ref={recaptchaRef}>
+              </div>
+              
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? "Memproses..." : isLogin ? "Masuk" : "Daftar"}
               </Button>

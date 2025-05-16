@@ -1,16 +1,13 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { Session, User, AuthError } from '@supabase/supabase-js';
 
 // Define types for our context
-type User = {
-  id: string;
-  email: string;
-  name?: string;
-};
-
 type AuthContextType = {
   user: User | null;
+  session: Session | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
@@ -21,96 +18,99 @@ type AuthContextType = {
 // Create the auth context
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// In a real app, these would connect to an auth service like Firebase, Auth0, etc.
-// For this demo, we'll simulate authentication
-
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Check for existing session on mount
+  // Set up auth state listener and check for existing session
   useEffect(() => {
-    const checkAuth = () => {
-      try {
-        const savedUser = localStorage.getItem('kitopanto_user');
-        if (savedUser) {
-          setUser(JSON.parse(savedUser));
-        }
-      } catch (error) {
-        console.error('Failed to restore authentication state:', error);
-      } finally {
-        setLoading(false);
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, currentSession) => {
+        setSession(currentSession);
+        setUser(currentSession?.user ?? null);
       }
-    };
+    );
 
-    checkAuth();
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
+      setSession(currentSession);
+      setUser(currentSession?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  // Mock login function - in a real app, this would call your auth service
+  // Login function using Supabase auth
   const login = async (email: string, password: string) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Simple validation for demo purposes
-    if (!email.includes('@') || password.length < 6) {
-      throw new Error('Invalid credentials');
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+      
+      if (error) throw error;
+    } catch (error) {
+      const authError = error as AuthError;
+      console.error('Error logging in:', authError.message);
+      throw new Error(authError.message);
     }
-
-    const user = {
-      id: `user_${Date.now()}`,
-      email,
-      name: email.split('@')[0]
-    };
-
-    setUser(user);
-    localStorage.setItem('kitopanto_user', JSON.stringify(user));
   };
 
+  // Register function using Supabase auth
   const register = async (email: string, password: string) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // Simple validation for demo purposes
-    if (!email.includes('@') || password.length < 6) {
-      throw new Error('Invalid credentials');
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password
+      });
+      
+      if (error) throw error;
+    } catch (error) {
+      const authError = error as AuthError;
+      console.error('Error registering:', authError.message);
+      throw new Error(authError.message);
     }
-
-    // In a real app, you'd create a user in your backend here
-    console.log('User registered:', { email });
-    
-    // For demo, we'll just return success without logging in automatically
-    return;
   };
 
+  // Login with Google using Supabase auth
   const loginWithGoogle = async () => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // In a real app, this would open Google OAuth flow
-    // For demo purposes, we'll simulate a successful login
-    const mockGoogleUser = {
-      id: `google_${Date.now()}`,
-      email: 'demo.user@gmail.com',
-      name: 'Demo User'
-    };
-
-    setUser(mockGoogleUser);
-    localStorage.setItem('kitopanto_user', JSON.stringify(mockGoogleUser));
-    toast.success("Login dengan Google berhasil");
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/`
+        }
+      });
+      
+      if (error) throw error;
+    } catch (error) {
+      const authError = error as AuthError;
+      console.error('Error logging in with Google:', authError.message);
+      throw new Error(authError.message);
+    }
   };
 
+  // Logout function using Supabase auth
   const logout = async () => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    setUser(null);
-    localStorage.removeItem('kitopanto_user');
-    toast.info("Anda telah keluar dari sistem");
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+    } catch (error) {
+      const authError = error as AuthError;
+      console.error('Error logging out:', authError.message);
+      throw new Error(authError.message);
+    }
   };
 
   return (
     <AuthContext.Provider value={{
       user,
+      session,
       loading,
       login,
       register,
