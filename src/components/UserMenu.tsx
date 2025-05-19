@@ -35,7 +35,7 @@ const UserMenu = () => {
           className="border-kitopanto-blue text-kitopanto-blue hover:bg-kitopanto-blue hover:text-white"
         >
           <UserRound className="mr-2 h-4 w-4" />
-          {user.name || 'Akun Saya'}
+          {user.email?.split('@')[0] || 'Akun Saya'}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
