@@ -1,24 +1,27 @@
 
 import React from 'react';
-import { Shield } from 'lucide-react';
+import { Shield, Phone, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-kitopanto-blue text-white pt-16 pb-8">
+    <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="kitopanto-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <Shield className="h-8 w-8 text-kitopanto-orange" />
-              <span className="text-xl font-bold text-white">Kitopanto CCTV</span>
+              <img 
+                src="/src/EmasHijra_20250524_191024_0000.svg" 
+                alt="Kitopanto Logo" 
+                className="h-8 w-auto brightness-0 invert"
+              />
             </div>
-            <p className="text-gray-300 mb-6">
-              Solusi keamanan terbaik dengan teknologi terkini untuk rumah dan bisnis Anda.
+            <p className="text-gray-300 mb-6 text-sm">
+              Kitopanto adalah penyedia jasa pemasangan CCTV profesional dengan teknologi terkini untuk keamanan rumah dan bisnis Anda.
             </p>
             <div className="flex space-x-4">
               {['facebook', 'instagram', 'youtube', 'twitter'].map(social => (
-                <a key={social} href="#" className="bg-slate-700 p-2 rounded-full hover:bg-kitopanto-orange transition-colors">
+                <a key={social} href="#" className="bg-gray-700 p-2 rounded-full hover:bg-orange-500 transition-colors">
                   <span className="sr-only">{social}</span>
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"></path>
@@ -29,15 +32,15 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Produk</h3>
-            <ul className="space-y-3">
+            <h3 className="text-lg font-semibold mb-6">Produk & Layanan</h3>
+            <ul className="space-y-3 text-sm">
               {[
-                'Kamera Outdoor',
-                'Kamera Indoor',
-                'Sistem NVR',
-                'Kamera Tersembunyi',
-                'Aksesoris',
-                'Software'
+                'CCTV Indoor',
+                'CCTV Outdoor',
+                'CCTV Wireless',
+                'Pemasangan Profesional',
+                'Maintenance & Service',
+                'Konsultasi Gratis'
               ].map(item => (
                 <li key={item}>
                   <a href="#" className="text-gray-300 hover:text-white transition-colors">
@@ -49,61 +52,75 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Layanan</h3>
-            <ul className="space-y-3">
-              {[
-                'Konsultasi',
-                'Instalasi',
-                'Maintenance',
-                'Service & Repair',
-                'Training',
-                'Custom Solutions'
-              ].map(item => (
-                <li key={item}>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
+            <h3 className="text-lg font-semibold mb-6">Perusahaan</h3>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link to="/privacy" className="text-gray-300 hover:text-white transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="text-gray-300 hover:text-white transition-colors">
+                  Syarat & Ketentuan
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  Tentang Kami
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  Karir
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  Blog
+                </a>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold mb-6">Hubungi Kami</h3>
-            <ul className="space-y-4">
-              <li className="flex">
-                <svg className="h-5 w-5 text-kitopanto-orange mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span className="text-gray-300">Jl. Keamanan No. 123, Jakarta Pusat</span>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 text-orange-500 mr-3 mt-0.5 flex-shrink-0" />
+                <span className="text-gray-300">Jl. Teknologi No. 123, Jakarta Selatan 12560</span>
               </li>
-              <li className="flex">
-                <svg className="h-5 w-5 text-kitopanto-orange mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <span className="text-gray-300">+62 812-3456-789</span>
+              <li className="flex items-center">
+                <Phone className="h-5 w-5 text-orange-500 mr-3 flex-shrink-0" />
+                <span className="text-gray-300">+62 812-3456-7890</span>
               </li>
-              <li className="flex">
-                <svg className="h-5 w-5 text-kitopanto-orange mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span className="text-gray-300">info@kitopantocctv.com</span>
+              <li className="flex items-center">
+                <Mail className="h-5 w-5 text-orange-500 mr-3 flex-shrink-0" />
+                <span className="text-gray-300">info@kitopanto.com</span>
               </li>
             </ul>
+            
+            <div className="mt-6 p-4 bg-gray-800 rounded-lg">
+              <p className="text-xs text-gray-400 mb-2">Jam Operasional:</p>
+              <p className="text-sm text-white">Senin - Sabtu: 08:00 - 18:00</p>
+              <p className="text-sm text-white">Minggu: 09:00 - 15:00</p>
+            </div>
           </div>
         </div>
 
-        <hr className="border-slate-700 mb-8" />
+        <hr className="border-gray-700 mb-8" />
 
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm">
           <p className="text-gray-300 mb-4 md:mb-0">
-            &copy; 2025 Kitopanto CCTV. All rights reserved.
+            &copy; 2025 Kitopanto. Semua hak dilindungi undang-undang.
           </p>
           <div className="flex space-x-6">
-            <Link to="/privacy" className="text-gray-300 hover:text-white transition-colors">Kebijakan Privasi</Link>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Syarat & Ketentuan</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Peta Situs</a>
+            <Link to="/privacy" className="text-gray-300 hover:text-white transition-colors">
+              Kebijakan Privasi
+            </Link>
+            <Link to="/terms" className="text-gray-300 hover:text-white transition-colors">
+              Syarat & Ketentuan
+            </Link>
+            <a href="#" className="text-gray-300 hover:text-white transition-colors">Sitemap</a>
           </div>
         </div>
       </div>

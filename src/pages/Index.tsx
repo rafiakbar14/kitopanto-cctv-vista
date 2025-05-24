@@ -1,18 +1,14 @@
 
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import Features from '../components/Features';
-import ProductShowcase from '../components/ProductShowcase';
-import WhyUs from '../components/WhyUs';
-import Testimonials from '../components/Testimonials';
-import ContactCTA from '../components/ContactCTA';
+import HeroSection from '../components/HeroSection';
+import ProductSection from '../components/ProductSection';
+import ConsultationForm from '../components/ConsultationForm';
 import Footer from '../components/Footer';
 
 const Index = () => {
   useEffect(() => {
-    // Update page title
-    document.title = "Kitopanto CCTV - Solusi Keamanan Terpercaya";
+    document.title = "Kitopanto - Jasa Pemasangan CCTV Profesional";
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -40,12 +36,9 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <Navbar />
       <main>
-        <Hero />
-        <ProductShowcase />
-        <Features />
-        <WhyUs />
-        <Testimonials />
-        <ContactCTA />
+        <HeroSection />
+        <ProductSection />
+        <ConsultationForm />
       </main>
       <Footer />
     </div>
